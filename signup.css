@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+footer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+footer a {
+  color: gray;
+  text-decoration: none;
+  border: 1px solid white;
+}
+
+footer a:hover {
+  color: pink;
+}
+
+.footer-layout p {
+  font-size: small;
+  margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid white;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.margin-top {
+  margin-top: 20px;
+}
+
+.gap-1 {
+  gap: 1px;
+}
+
+.gap-2 {
+  gap: 2px;
+}
+
+.gap-3 {
+  gap: 3px;
+}
+
+.gap-130 {
+  gap: 130px;
+}
+
+.gap-150 {
+  gap: 150px;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.justify-between {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  background-color: black;
+  color: white;
+  padding: 4px 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fixed-button:hover {
+  color: pink;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea,
+button {
+  color: #ccc;
+  background-color: black;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+input[type="radio"] {
+  width: auto;
+  accent-color: pink;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+input[type="checkbox"] {
+  transform: scale(0.8);
+  accent-color: pink;
+  cursor: pointer;
+}
+
+fieldset {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  padding: 16px;
+  gap: 12px 20px;
+  border: 1px solid #ccc;
+}
+
+fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button {
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: pink;
+  color: black;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 20px;
+  color: #777;
+
+  & > a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+  }
+
+  & > a:hover {
+    color: pink;
+  }
+}
+
+footer a {
+  color: lightgrey;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: pink;
+}
+
+footer p {
+  font-size: small;
+  margin-top: 50px;
+}

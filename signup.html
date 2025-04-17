@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <script src="./signup.js"></script>
+    <link rel="stylesheet" href="./background.css" />
+    <link rel="stylesheet" href="./signup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>회원가입</h1>
+      <form
+        action="/signup"
+        name="regform"
+        id="regform"
+        method="post"
+        onsubmit="return sendit()"
+      >
+        <!--id-->
+        <div class="form-group">
+          <label for="userid">아이디</label>
+          <input
+            type="text"
+            name="id"
+            maxlength="20"
+            id="userid"
+            required
+            placeholder="4자 이상 20자 이하의 영문자 및 숫자로 입력하세요"
+          />
+        </div>
+
+        <!--pw-->
+        <div class="form-group">
+          <label for="userpw">비밀번호</label>
+          <input
+            type="password"
+            name="password"
+            maxlength="20"
+            id="userpw"
+            placeholder="8자이상 20자이하의 영문자, 숫자, 특수문자를 한 자 이상 꼭 포함"
+          />
+        </div>
+        <div class="form-group">
+          <label for="confirmpw">비밀번호 확인</label>
+          <input
+            type="password"
+            name="confirmpassword"
+            maxlength="20"
+            id="confirmpw"
+            placeholder="동일한 비밀번호를 입력"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="name">이름</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            maxlength="10"
+            placeholder="10자 이하의 한글"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="hp">휴대폰번호</label>
+          <input
+            type="text"
+            name="hp"
+            id="hp"
+            maxlength="20"
+            placeholder="-하이픈을 포함한 숫자 11자"
+          />
+        </div>
+
+        <!--email-->
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input
+            type="email"
+            name="email"
+            maxlength="100"
+            id="email"
+            required
+            placeholder="이메일 입력"
+          />
+        </div>
+
+        <!--gender-->
+        <div class="form-group">
+          <label for="gender">성별</label>
+          <div class="justify-between gap-150">
+            <div>
+              <label>남자</label>
+              <input type="radio" id="male" name="gender" value="남" checked />
+            </div>
+            <div>
+              <label>여자</label>
+              <input type="radio" name="gender" id="female" value="여" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="snn">주민등록번호</label>
+          <input
+            type="text"
+            name="ssn1"
+            id="ssn1"
+            maxlength="6"
+            class="ssn"
+            placeholder="주민번호 앞자리 6자"
+          />
+          -
+          <input
+            type="text"
+            name="ssn2"
+            id="ssn2"
+            maxlength="7"
+            class="ssn"
+            placeholder="주민번호 뒷자리 7자"
+          />
+          <button>주민등록번호 검증</button>
+        </div>
+
+        <div class="form-group">
+          <label for="zipcode">우편번호</label>
+          <input
+            type="text"
+            name="zipcode"
+            maxlength="5"
+            id="zipcode"
+            placeholder="우편번호 5자"
+          />
+          <button>우편번호 찾기</button>
+        </div>
+
+        <div class="form-group">
+          <label for="address1">주소</label>
+          <input
+            type="text"
+            name="address1"
+            id="address1"
+            placeholder="주소 입력"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="address2">상세 주소</label>
+          <input
+            type="text"
+            name="address2"
+            id="address2"
+            placeholder="상세 주소 입력"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="address3">참고 항목</label>
+          <input
+            type="text"
+            name="address3"
+            id="address3"
+            placeholder="주소 참고 항목 입력"
+          />
+        </div>
+
+        <!--관심사-->
+        <div class="form-group">
+          <label for="interest">관심사</label>
+          <fieldset>
+            <label for="music">음악 감상</label>
+            <input type="checkbox" id="music" name="interst" value="music" />
+            <label for="movie">영화 감상</label>
+            <input type="checkbox" id="movie" name="interst" value="movie" />
+            <label for="travel">여행</label>
+            <input type="checkbox" id="travel" name="interst" value="travel" />
+            <label for="fitness">운동</label>
+            <input
+              type="checkbox"
+              id="fitness"
+              name="interst"
+              value="fitness"
+            />
+            <label for="game">게임</label>
+            <input type="checkbox" id="game" name="interst" value="game" />
+            <label for="programming">프로그래밍</label>
+            <input
+              type="checkbox"
+              id="programming"
+              name="interst"
+              value="programming"
+            />
+            <label for="investment">재테크</label>
+            <input
+              type="checkbox"
+              id="investment"
+              name="interst"
+              value="investment"
+            />
+          </fieldset>
+        </div>
+
+        <!--자기소개-->
+        <div class="form-group">
+          <label for="intro">자기소개</label>
+          <textarea
+            name="intro"
+            id="intro"
+            placeholder="간단한 자기소개 작성"
+          ></textarea>
+        </div>
+
+        <button type="submit">가입하기</button>
+
+        <p class="footer-text">
+          이미 계정이 있으신가요?
+          <a href="login.html">로그인</a>
+        </p>
+      </form>
+
+      <a href="#" class="fixed-button">도움말</a>
+    </main>
+    <footer>
+      <p>&copy; 2025 손단하. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

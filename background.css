@@ -1,0 +1,12 @@
+body {
+  color: white;
+  padding: 40px;
+  background-color: black;
+
+  background-image: url("./img/astronaut.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 300px 300px;
+
+  background-attachment: fixed;
+}
