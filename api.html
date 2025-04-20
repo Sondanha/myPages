@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>국가별 여행 경보 정보</title>
+    <style>
+      body {
+        padding: 20px;
+        background-color: #ccc;
+      }
+      h1 {
+        text-align: center;
+      }
+      header {
+        display: flex;
+        justify-content: center;
+      }
+      input {
+        padding: 5px;
+        width: 500px;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td,
+      th {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+      }
+      .flag {
+        max-height: 100px;
+        border: 1px solid black;
+      }
+      .map {
+        max-width: 100%;
+        height: auto;
+        width: 600px;
+      }
+      #alertleveInfo {
+        border: 1px solid black;
+        background-color: rgb(97, 97, 97);
+        border-radius: 30px;
+        margin-top: 30px;
+        padding: 10px;
+      }
+      h2 {
+        text-align: center;
+        color: red;
+      }
+      ul {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 20px;
+        justify-content: space-between;
+      }
+      li {
+        padding: 10px;
+        list-style-type: none;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 30px;
+      }
+      .level1 {
+        background-color: #4685d7;
+      }
+      .level2 {
+        background-color: #f1c40f;
+      }
+      .level3 {
+        background-color: #e74c3c;
+      }
+      .level4 {
+        color: white;
+        background-color: #252525;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>국가 여행 경보 확인</h1>
+    <header>
+      <input type="text" id="searchInput" placeholder="국가명 입력 (예:한국)" />
+      <button onclick="searchCountry()">검색</button>
+    </header>
+
+    <div id="result"></div>
+
+    <div id="alertleveInfo">
+      <h2>4단계 여행경보 안내</h2>
+      <ul>
+        <li class="level1">
+          <h4>1단계 남색경보</h4>
+          <p>
+            여행유의<br />신변안전 위험 요인<br />
+            숙지·대비
+          </p>
+        </li>
+        <li class="level2">
+          <h4>2단계 황색경보</h4>
+          <p>
+            여행자제<br />(여행예정자)<br />불필요한 여행 자제<br />(체류자)<br />신변안전
+            특별유의
+          </p>
+        </li>
+        <li class="level3">
+          <h4>3단계 적색경보</h4>
+          <p>
+            출국권고<br />(여행예정자)<br />여행 취소·연기<br />(체류자)<br /><strong
+              >긴요한 용무가<br />
+              아닌 한 출국</strong
+            >
+          </p>
+        </li>
+        <li class="level4">
+          <h4>4단계 흑색경보</h4>
+          <p>
+            여행금지<br />(여행예정자)<br />여행금지 준수<br />(체류자)<br /><strong
+              >즉시 대피·철수</strong
+            >
+          </p>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const serviceKey =
+        "K4jlOAJiUWlRs%2FQ4nZlkb4exnDFFrlX1JSDX48nZ3kkwF8Y%2FzzDccjSbqJPSiu9F7qBnOwAE6gKBxxZi516QPQ%3D%3D";
+
+      function searchCountry() {
+        const country_nm = document.getElementById("searchInput").value.trim();
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "";
+
+        if (!country_nm) {
+          alert("국가명을 입력해주세요.");
+          return;
+        }
+
+        const url = `https://apis.data.go.kr/1262000/TravelAlarmService2/getTravelAlarmList2?serviceKey=${serviceKey}&pageNo=1&numOfRows=10&cond[country_nm::EQ]=${country_nm}`;
+
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            const items = data.response?.body?.items?.item;
+
+            if (!items || items.length === 0) {
+              resultDiv.innerHTML =
+                "<p>해당 국가의 데이터를 찾을 수 없습니다.</p>";
+              return;
+            }
+
+            const travelAlertLevels = {
+              1: {
+                title: "1단계 남색경보",
+                description: "여행유의<br>신변안전 위험 요인 숙지·대비",
+                color: "#4685d7",
+              },
+              2: {
+                title: "2단계 황색경보",
+                description:
+                  "여행자제<br>(여행예정자) 불필요한 여행 자제<br>(체류자) 신변안전 특별유의",
+                color: "#f1c40f",
+              },
+              3: {
+                title: "3단계 적색경보",
+                description:
+                  "출국권고<br>(여행예정자) 여행 취소·연기<br>(체류자) 긴요한 용무가 아닌 한 출국",
+                color: "#e74c3c",
+              },
+              4: {
+                title: "4단계 흑색경보",
+                description:
+                  "여행금지<br>(여행예정자) 여행금지 준수<br>(체류자) 즉시 대피·철수",
+                color: "#7f8c8d",
+              },
+            };
+
+            const item = items[0];
+
+            const levelInfo = travelAlertLevels[parseInt(item.alarm_lvl)];
+
+            resultDiv.innerHTML = `
+            <table>
+              <tr><th>국가</th><td>${item.country_nm}<br><img src="${
+              item.flag_download_url
+            }" alt="국기" class="flag"/></td></tr>
+              <tr><th>작성일</th><td>${item.written_dt}</td></tr>
+              <tr><th>대륙명</th><td>${
+                item.continent_nm || "정보 없음"
+              }</td></tr>
+              <tr><th>경보단계</th><td>
+  ${
+    levelInfo
+      ? `<div style="background-color: ${levelInfo.color}; padding: 10px; border-radius: 15px;">
+          <strong>${levelInfo.title}</strong><br>
+          <small>${levelInfo.description}</small>
+        </div>`
+      : "정보 없음"
+  }
+</td></tr>
+              <tr><th>위험 지도</th><td><img src="${
+                item.dang_map_download_url
+              }" alt="위험지도" class="map"/></td></tr>
+            </table>
+          `;
+          })
+          .catch((err) => {
+            console.error("API 호출 실패:", err);
+            resultDiv.innerHTML = "<p>데이터를 불러오는 데 실패했습니다.</p>";
+          });
+      }
+    </script>
+  </body>
+</html>
